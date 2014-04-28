@@ -7,7 +7,14 @@ class IceCreamFinder
   GOOGLE_API_KEY = "ENTER_YOUR_KEY_HERE"
   
   def initialize
-    run
+    while true
+      run
+      
+      puts "Would you like to search again?"
+      ans = gets.chomp
+      
+      break if ans[0].downcase != 'y'
+    end
   end
   
   def run 
