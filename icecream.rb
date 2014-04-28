@@ -13,9 +13,11 @@ class IceCreamFinder
   def run 
     puts "What is your current address?"
     curr_address = gets.chomp
+    puts "What would you like to look for?"
+    keyword = gets.chomp
     start_loc = get_start_loc(curr_address)
     
-    all_places = get_places(start_loc)
+    all_places = get_places(start_loc, keyword)
     
     dest_loc = select_destination(all_places)
     give_directions(start_loc, dest_loc)
@@ -34,7 +36,7 @@ class IceCreamFinder
     start_loc["results"][0]["geometry"]["location"].values_at("lat", "lng")
   end
 
-  def get_places(start_loc)
+  def get_places(start_loc, keyword)
     start_lat, start_lng = start_loc
     url = Addressable::URI.new(
       :scheme => "https",
@@ -43,7 +45,7 @@ class IceCreamFinder
       :query_values => {:key => GOOGLE_API_KEY,
                         :location => "#{start_lat}, #{start_lng}",
                         :rankby => :distance,
-                        :keyword => 'ice cream',
+                        :keyword => keyword,
                         :sensor => false}).to_s
 
     response = RestClient.get(url)
