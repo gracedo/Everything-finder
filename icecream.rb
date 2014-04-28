@@ -4,6 +4,8 @@ require 'addressable/uri'
 require 'nokogiri'
 
 class IceCreamFinder
+  GOOGLE_API_KEY = "ENTER_YOUR_KEY_HERE"
+  
   def initialize
     run
   end
@@ -38,7 +40,7 @@ class IceCreamFinder
       :scheme => "https",
       :host => "maps.googleapis.com",
       :path => "/maps/api/place/nearbysearch/json",
-      :query_values => {:key => "YOUR KEY HERE",
+      :query_values => {:key => GOOGLE_API_KEY,
                         :location => "#{start_lat}, #{start_lng}",
                         :rankby => :distance,
                         :keyword => 'ice cream',
