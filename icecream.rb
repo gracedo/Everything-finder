@@ -70,12 +70,19 @@ class IceCreamFinder
   def select_destination(all_places)
     puts "Please select where you'd like to go:"
     
-    all_places.each_index do |idx|
-      puts "[#{idx}] #{all_places[idx].first}"
-    end
+    while true
+      all_places.each_index do |idx|
+        puts "[#{idx}] #{all_places[idx].first}"
+      end
 
-    destination_idx = gets.chomp.to_i
-    all_places[destination_idx][1]
+      destination_idx = gets.chomp.to_i
+    
+      if destination_idx >= all_places.length || destination_idx < 0
+        puts "Invalid selection. Please try again."
+      else
+        return all_places[destination_idx][1]
+      end
+    end
   end
 
   def give_directions(start_loc, dest_loc)
